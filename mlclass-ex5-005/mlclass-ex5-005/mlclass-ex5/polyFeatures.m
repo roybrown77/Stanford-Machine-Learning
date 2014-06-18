@@ -15,10 +15,11 @@ X_poly = zeros(numel(X), p);
 %
 % 
 
-
-
-
-
+for iter=1:size(X,1)
+  for iter2=1:p
+    X_poly(iter,iter2) = X(iter) .^ iter2;
+  end
+end
 
 % =========================================================================
 
