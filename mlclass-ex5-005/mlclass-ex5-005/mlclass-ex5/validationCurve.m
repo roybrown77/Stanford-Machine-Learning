@@ -39,14 +39,16 @@ error_val = zeros(length(lambda_vec), 1);
 %
 %
 
-
-
-
-
-
-
-
-
+       for iter = 1:length(lambda_vec)
+           lambda = lambda_vec(iter);
+           theta = trainLinearReg(X, y, lambda);
+	   
+	   JTrain = linearRegCostFunction(X, y, theta, 0);
+	   error_train(iter) = JTrain;
+	   
+	   JValidation = linearRegCostFunction(Xval, yval, theta, 0);
+           error_val(iter) = JValidation;     
+       end
 
 % =========================================================================
 
