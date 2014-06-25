@@ -23,11 +23,26 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
+CSigmaArray = [0:01, 0:03, 0:1, 0:3, 1, 3, 10, 30];
+count = size(CSigmaArray,2);
+error = 1000;
 
-
-
-
-
+for iter=1:count
+  newC = CSigmaArray(1,iter);
+  for iter2=1:count
+    newSigma = CSigmaArray(1,iter2);
+    
+    model = svmTrain(X, y, newC, @(XVal, yVal) gaussianKernel(XVal, yVal, newSigma));
+    
+    predictions = svmPredict(model, Xval);
+    newError = mean(double(predictions ~= yval))
+    if (newError > error)
+      error = newError
+      C = newC;
+      sigma = newSigma;
+    end
+  end
+end
 
 % =========================================================================
 
