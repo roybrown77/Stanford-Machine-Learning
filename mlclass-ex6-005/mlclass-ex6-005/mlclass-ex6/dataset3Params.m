@@ -23,7 +23,7 @@ sigma = 0.3;
 %        mean(double(predictions ~= yval))
 %
 
-CSigmaArray = [0:01, 0:03, 0:1, 0:3, 1, 3, 10, 30];
+CSigmaArray = [0.01, 0.03, 0.1, 0.3, 1, 3, 10, 30];
 count = size(CSigmaArray,2);
 error = 1000;
 
@@ -32,11 +32,16 @@ for iter=1:count
   for iter2=1:count
     newSigma = CSigmaArray(1,iter2);
     
-    model = svmTrain(X, y, newC, @(XVal, yVal) gaussianKernel(XVal, yVal, newSigma));
+    fprintf('\nEvaluating x1: \n')
+    disp(x1);
+    fprintf('\nEvaluating x2: \n')
+    disp(x2);
+    
+    model = svmTrain(X, y, newC, @(x1, x2) gaussianKernel(x1, x2, newSigma));
     
     predictions = svmPredict(model, Xval);
     newError = mean(double(predictions ~= yval))
-    if (newError > error)
+    if (newError <= error)
       error = newError
       C = newC;
       sigma = newSigma;
