@@ -48,12 +48,15 @@ x = zeros(n, 1);
 %
 %
 
+wordIndicesCount = size(word_indices,1);
 
+disp(wordIndicesCount);
+disp(size(x));
 
-
-
-
-
+for iter=1:wordIndicesCount
+  value = word_indices(iter)  
+  x(value,1) = 1;
+end
 
 % =========================================================================
     
