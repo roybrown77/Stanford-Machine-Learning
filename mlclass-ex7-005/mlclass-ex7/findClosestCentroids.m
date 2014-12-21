@@ -25,7 +25,7 @@ positions = zeros(size(centroids,1),1);
           
 for iter = 1:size(idx,1) 
   for iter2 = 1:size(centroids,1)
-     positions(iter2,1) = abs( norm(X(iter,:) - centroids(iter2,:), 2) );
+     positions(iter2) = abs( norm(X(iter,:) - centroids(iter2,:), 2) );
   end
   
   [minValue, minValueIndex] = min(positions);
