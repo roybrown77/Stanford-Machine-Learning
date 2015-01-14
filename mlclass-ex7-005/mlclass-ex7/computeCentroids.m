@@ -38,9 +38,7 @@ for iter=1:K
   
   multiplier = ones(m,1);  
   centroids(iter,:) = ((centroidsK' * multiplier) / centroidsKCount)';
-end 
-
-fprintf('%f  \n', centroids(1:2, :));
+end
 
 % =============================================================
 
